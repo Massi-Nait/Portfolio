@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Photogrammetry — Massinissa Nait</title>
+
+<meta
+    name="description"
+    content="Photogrammetry and archaeological documentation by Massinissa Nait."
+>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
+    rel="stylesheet"
+>
+
+<script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"
+></script>
+
+
+<style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root {
+    --paper: #eee9df;
+    --ink: #171715;
+    --muted: #706d64;
+    --line: #c9c2b6;
+    --accent: #8a5039;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+    width: min(1280px, 90%);
+    margin: auto;
+}
+
+
+/* =========================================================
+   PAGE REVEAL
+========================================================= */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: var(--ink);
+    z-index: 9999;
+    pointer-events: none;
+    animation:
+        pageReveal
+        1.1s
+        cubic-bezier(.77,0,.18,1)
+        forwards;
+}
+
+@keyframes pageReveal {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    height: 92px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+/* BIGGER NAME */
+
+.logo {
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+}
+
+
+.navigation {
+    display: flex;
+    gap: 34px;
+}
+
+.navigation a {
+    position: relative;
+
+    font-size: 10px;
+    letter-spacing: .15em;
+
+    text-transform: uppercase;
+}
+
+.navigation a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 1px;
+
+    background: var(--accent);
+
+    transition: width .3s ease;
+}
+
+.navigation a:hover::after {
+    width: 100%;
+}
+
+
+/* =========================================================
+   PAGE INTRO
+========================================================= */
+
+.page-intro {
+
+    position: relative;
+
+    min-height: 560px;
+
+    padding: 100px 0;
+
+    display: grid;
+
+    grid-template-columns: 1fr 2fr;
+
+    gap: 6vw;
+
+    align-items: center;
+
+    border-bottom: 1px solid var(--line);
+
+}
+
+
+/* BLACK TRANSPARENT FRAME */
+
+.page-intro > div:last-child {
+
+    padding: 55px 60px;
+
+    background: rgba(0,0,0,.76);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.10);
+
+}
+
+
+/* WHITE TEXT INSIDE FRAME */
+
+.page-intro > div:last-child h1 {
+
+    color: white;
+
+}
+
+.page-intro > div:last-child p {
+
+    color: rgba(255,255,255,.72);
+
+}
+
+
+.page-intro-label {
+
+    color: var(--accent);
+
+    font-size: 10px;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+    align-self: start;
+
+    padding-top: 10px;
+}
+
+
+.page-intro h1 {
+
+    font-family: "Playfair Display", serif;
+
+    font-size:
+        clamp(70px, 9vw, 130px);
+
+    font-weight: 500;
+
+    line-height: .82;
+
+    letter-spacing: -.06em;
+}
+
+
+.page-intro p {
+
+    max-width: 650px;
+
+    margin-top: 45px;
+
+    color: var(--muted);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   PROJECT LIST
+========================================================= */
+
+.projects {
+    padding: 120px 0;
+}
+
+
+/* =========================================================
+   PROJECT
+========================================================= */
+
+.project {
+    margin-bottom: 180px;
+}
+
+.project:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   PROJECT HEADER
+========================================================= */
+
+.project-header {
+
+    display: grid;
+
+    grid-template-columns:
+        100px 1fr 1fr;
+
+    gap: 35px;
+
+    align-items: end;
+
+    margin-bottom: 35px;
+}
+
+
+.project-number {
+
+    color: var(--accent);
+
+    font-size: 10px;
+
+    letter-spacing: .18em;
+}
+
+
+.project-title {
+
+    font-family: "Playfair Display", serif;
+
+    font-size:
+        clamp(50px, 6vw, 80px);
+
+    font-weight: 500;
+
+    line-height: .9;
+
+    letter-spacing: -.04em;
+}
+
+
+.project-subtitle {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.project-media {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 2px;
+
+    background: var(--line);
+}
+
+
+.media {
+
+    position: relative;
+
+    height: 620px;
+
+    overflow: hidden;
+
+    background: #d5cec1;
+}
+
+
+.original-image {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: saturate(.7);
+
+    transition:
+        transform 1s cubic-bezier(.2,.7,.2,1),
+        filter .7s ease;
+}
+
+.media:hover .original-image {
+
+    transform: scale(1.025);
+
+    filter: saturate(1);
+}
+
+
+/* =========================================================
+   MEDIA LABEL
+========================================================= */
+
+.media-label {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    z-index: 10;
+
+    padding: 9px 12px;
+
+    background: rgba(0,0,0,.55);
+
+    color: white;
+
+    font-size: 8px;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   MODEL
+========================================================= */
+
+.model-wrapper {
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #dad4c9,
+            #c3bbae
+        );
+}
+
+
+model-viewer {
+
+    width: 100%;
+    height: 100%;
+
+    background: transparent;
+
+    --poster-color: transparent;
+}
+
+
+.model-instruction {
+
+    position: absolute;
+
+    bottom: 20px;
+    left: 20px;
+
+    z-index: 10;
+
+    padding: 9px 12px;
+
+    background: rgba(0,0,0,.55);
+
+    color: white;
+
+    font-size: 8px;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INFORMATION
+========================================================= */
+
+.project-information {
+
+    padding-top: 25px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 2fr;
+
+    gap: 6vw;
+}
+
+
+.project-description {
+
+    max-width: 700px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.project-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    border-top: 1px solid var(--line);
+}
+
+
+.detail {
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+.detail:nth-child(odd) {
+    margin-right: 25px;
+}
+
+
+.detail-label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--accent);
+
+    font-size: 8px;
+
+    letter-spacing: .14em;
+
+    text-transform: uppercase;
+}
+
+
+.detail-value {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   WORKFLOW
+========================================================= */
+
+.workflow {
+
+    margin-top: 55px;
+
+    padding-top: 30px;
+
+    border-top: 1px solid var(--line);
+}
+
+
+.workflow-title {
+
+    margin-bottom: 25px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 32px;
+
+    font-weight: 500;
+}
+
+
+.workflow-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    border-top: 1px solid var(--line);
+
+    border-left: 1px solid var(--line);
+}
+
+
+.workflow-step {
+
+    min-height: 130px;
+
+    padding: 20px;
+
+    border-right: 1px solid var(--line);
+
+    border-bottom: 1px solid var(--line);
+}
+
+
+.workflow-number {
+
+    color: var(--accent);
+
+    font-size: 9px;
+
+    letter-spacing: .14em;
+}
+
+
+.workflow-name {
+
+    margin-top: 30px;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+.back {
+
+    padding: 100px 0;
+
+    border-top: 1px solid var(--line);
+}
+
+
+.back a {
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 35px;
+
+    transition:
+        color .3s ease,
+        transform .3s ease;
+}
+
+
+.back a:hover {
+
+    color: var(--accent);
+
+    transform: translateX(8px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    border-top: 1px solid var(--line);
+
+    padding: 30px 0 50px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .container {
+        width: min(92%, 700px);
+    }
+
+    header {
+        height: 78px;
+    }
+
+    .logo {
+        font-size: 15px;
+    }
+
+    .navigation {
+        gap: 18px;
+    }
+
+    .navigation a {
+        font-size: 8px;
+    }
+
+
+    .page-intro {
+
+        min-height: auto;
+
+        padding: 75px 0 70px;
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+    }
+
+
+    .page-intro-label {
+        padding-top: 0;
+    }
+
+
+    .page-intro > div:last-child {
+
+        padding: 45px;
+
+    }
+
+
+    .page-intro h1 {
+        font-size: clamp(65px, 12vw, 90px);
+    }
+
+
+    .projects {
+        padding: 80px 0;
+    }
+
+
+    .project {
+        margin-bottom: 110px;
+    }
+
+
+    .project-header {
+
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+
+        align-items: start;
+    }
+
+
+    .project-title {
+        font-size: 58px;
+    }
+
+
+    .project-media {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .media {
+        height: 500px;
+    }
+
+
+    .project-information {
+
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+    }
+
+
+    .project-details {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .detail:nth-child(odd) {
+        margin-right: 25px;
+    }
+
+
+    .workflow-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    footer {
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+    }
+
+
+    header {
+
+        height: auto;
+
+        min-height: 76px;
+
+        padding: 18px 0;
+
+        align-items: flex-start;
+
+        gap: 20px;
+
+    }
+
+
+    .logo {
+
+        font-size: 14px;
+
+        letter-spacing: .10em;
+
+        white-space: nowrap;
+
+    }
+
+
+    .navigation {
+
+        gap: 13px;
+
+        align-items: center;
+
+    }
+
+
+    .navigation a {
+
+        font-size: 7px;
+
+        letter-spacing: .10em;
+
+    }
+
+
+    .page-intro {
+
+        padding: 60px 0 55px;
+
+        gap: 25px;
+
+    }
+
+
+    .page-intro-label {
+
+        font-size: 8px;
+
+    }
+
+
+    .page-intro > div:last-child {
+
+        padding: 35px 25px;
+
+    }
+
+
+    .page-intro h1 {
+
+        font-size:
+            clamp(54px, 16vw, 78px);
+
+        line-height: .84;
+
+    }
+
+
+    .page-intro p {
+
+        margin-top: 30px;
+
+        font-size: 14px;
+
+        line-height: 1.75;
+
+    }
+
+
+    .projects {
+
+        padding: 60px 0;
+
+    }
+
+
+    .project {
+
+        margin-bottom: 90px;
+
+    }
+
+
+    .project-header {
+
+        margin-bottom: 22px;
+
+    }
+
+
+    .project-number {
+
+        font-size: 8px;
+
+    }
+
+
+    .project-title {
+
+        font-size: clamp(48px, 15vw, 65px);
+
+    }
+
+
+    .project-subtitle {
+
+        font-size: 12px;
+
+    }
+
+
+    .project-media {
+
+        gap: 2px;
+
+    }
+
+
+    .media {
+
+        height: 390px;
+
+    }
+
+
+    .media-label {
+
+        top: 12px;
+
+        left: 12px;
+
+        padding: 8px 10px;
+
+        font-size: 7px;
+
+    }
+
+
+    .model-instruction {
+
+        bottom: 12px;
+
+        left: 12px;
+
+        padding: 8px 10px;
+
+        font-size: 7px;
+
+    }
+
+
+    .project-information {
+
+        padding-top: 20px;
+
+        gap: 30px;
+
+    }
+
+
+    .project-description {
+
+        font-size: 13px;
+
+        line-height: 1.75;
+
+    }
+
+
+    .project-details {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .detail {
+
+        padding: 14px 0;
+
+    }
+
+
+    .detail:nth-child(odd) {
+
+        margin-right: 0;
+
+    }
+
+
+    .workflow {
+
+        margin-top: 40px;
+
+    }
+
+
+    .workflow-title {
+
+        font-size: 28px;
+
+    }
+
+
+    .workflow-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .workflow-step {
+
+        min-height: 105px;
+
+        padding: 18px;
+
+    }
+
+
+    .workflow-name {
+
+        margin-top: 20px;
+
+        font-size: 18px;
+
+    }
+
+
+    .back {
+
+        padding: 65px 0;
+
+    }
+
+
+    .back a {
+
+        font-size: 27px;
+
+    }
+
+
+    footer {
+
+        padding: 25px 0 40px;
+
+        font-size: 7px;
+
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .logo {
+        font-size: 12px;
+    }
+
+    .navigation {
+        gap: 9px;
+    }
+
+    .navigation a {
+        font-size: 6.5px;
+    }
+
+    .page-intro > div:last-child {
+        padding: 30px 20px;
+    }
+
+    .page-intro h1 {
+        font-size: 50px;
+    }
+
+    .media {
+        height: 330px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<header>
+
+<a href="index.html" class="logo">
+    MASSINISSA NAIT
+</a>
+
+<nav class="navigation">
+
+<a href="index.html#work">
+    Work
+</a>
+
+<a href="index.html#about">
+    About
+</a>
+
+<a href="index.html#contact">
+    Contact
+</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="page-intro">
+
+<div class="page-intro-label">
+    01 · Selected Work
+</div>
+
+
+<div>
+
+<h1>
+    Photo<br>
+    grammetry.
+</h1>
+
+<p>
+    Archaeological documentation and digital
+    recording through image-based 3D reconstruction.
+    From field photography to measurable digital
+    models.
+</p>
+
+</div>
+
+</section>
+
+
+
+<main id="projects" class="projects"></main>
+
+
+
+<section class="back">
+
+<a href="index.html#work">
+    ← Back to selected work
+</a>
+
+</section>
+
+
+
+<footer>
+
+<span>
+    © 2026 Massinissa Nait
+</span>
+
+<span>
+    3D · Archaeology · Digital Heritage
+</span>
+
+</footer>
+
+
+</div>
+
+
+<script>
+
+const projects = [
+
+{
+
+number: "001",
+
+title: "Madaure",
+
+subtitle:
+"Archaeological documentation and photogrammetric reconstruction of archaeological remains.",
+
+original:
+"images/projects/photogrammetry/madaure-original.jpg",
+
+model:
+"images/projects/photogrammetry/madaure.glb",
+
+description:
+"Photogrammetric documentation of archaeological remains using overlapping photographic imagery to generate a three-dimensional digital representation of the site.",
+
+location:
+"Madaure · Algeria",
+
+software:
+"Agisoft Metashape",
+
+process:
+"Image-based 3D reconstruction",
+
+output:
+"Textured 3D model",
+
+workflow: [
+"Field Photography",
+"Image Alignment",
+"Dense Cloud",
+"Mesh Generation",
+"Textured Model"
+]
+
+},
+
+
+{
+
+number: "002",
+
+title: "Cuicul",
+
+subtitle:
+"Photogrammetric documentation of archaeological architecture.",
+
+original:
+"images/projects/photogrammetry/cuicul-original.jpg",
+
+model:
+"images/projects/photogrammetry/cuicul.glb",
+
+description:
+"Digital documentation and three-dimensional reconstruction of archaeological architectural remains.",
+
+location:
+"Cuicul · Algeria",
+
+software:
+"Agisoft Metashape",
+
+process:
+"Photogrammetric reconstruction",
+
+output:
+"Textured 3D model",
+
+workflow: [
+"Photography",
+"Alignment",
+"Dense Cloud",
+"Mesh",
+"Texture"
+]
+
+},
+
+
+{
+
+number: "003",
+
+title: "Project Three",
+
+subtitle:
+"Replace this with your project subtitle.",
+
+original:
+"images/projects/photogrammetry/project-03-original.jpg",
+
+model:
+"images/projects/photogrammetry/project-03.glb",
+
+description:
+"Replace this with your project description.",
+
+location:
+"Algeria",
+
+software:
+"Metashape",
+
+process:
+"Photogrammetry",
+
+output:
+"3D Model",
+
+workflow: [
+"Photography",
+"Alignment",
+"Dense Cloud",
+"Mesh",
+"Texture"
+]
+
+}
+
+];
+
+
+const projectContainer =
+document.getElementById("projects");
+
+
+function renderProjects() {
+
+projectContainer.innerHTML = "";
+
+
+projects.forEach(project => {
+
+const workflowHTML =
+project.workflow.map((step,index) => `
+
+<div class="workflow-step">
+
+<div class="workflow-number">
+${String(index + 1).padStart(2,"0")}
+</div>
+
+<div class="workflow-name">
+${step}
+</div>
+
+</div>
+
+`).join("");
+
+
+const projectHTML = `
+
+<article class="project">
+
+
+<div class="project-header">
+
+<div class="project-number">
+${project.number}
+</div>
+
+<h2 class="project-title">
+${project.title}
+</h2>
+
+<p class="project-subtitle">
+${project.subtitle}
+</p>
+
+</div>
+
+
+<div class="project-media">
+
+
+<div class="media">
+
+<div class="media-label">
+Original Record
+</div>
+
+<img
+class="original-image"
+src="${project.original}"
+alt="Original photograph — ${project.title}"
+loading="lazy"
+>
+
+</div>
+
+
+
+<div class="media">
+
+<div class="media-label">
+Photogrammetry · 3D
+</div>
+
+<div class="model-wrapper">
+
+<model-viewer
+src="${project.model}"
+alt="Interactive 3D photogrammetry model — ${project.title}"
+camera-controls
+auto-rotate
+shadow-intensity="1"
+exposure="1"
+interaction-prompt="auto"
+loading="lazy"
+></model-viewer>
+
+<div class="model-instruction">
+Drag · Rotate · Scroll to Zoom
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<div class="project-information">
+
+<div>
+
+<p class="project-description">
+${project.description}
+</p>
+
+</div>
+
+
+<div class="project-details">
+
+<div class="detail">
+
+<span class="detail-label">
+Location
+</span>
+
+<span class="detail-value">
+${project.location}
+</span>
+
+</div>
+
+
+<div class="detail">
+
+<span class="detail-label">
+Software
+</span>
+
+<span class="detail-value">
+${project.software}
+</span>
+
+</div>
+
+
+<div class="detail">
+
+<span class="detail-label">
+Process
+</span>
+
+<span class="detail-value">
+${project.process}
+</span>
+
+</div>
+
+
+<div class="detail">
+
+<span class="detail-label">
+Output
+</span>
+
+<span class="detail-value">
+${project.output}
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="workflow">
+
+<h3 class="workflow-title">
+Workflow
+</h3>
+
+<div class="workflow-grid">
+${workflowHTML}
+</div>
+
+</div>
+
+
+</article>
+
+`;
+
+projectContainer.insertAdjacentHTML(
+"beforeend",
+projectHTML
+);
+
+});
+
+}
+
+
+renderProjects();
+
+</script>
+
+</body>
+</html>
